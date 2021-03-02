@@ -2,7 +2,11 @@ package com.blogspot.soyamr.weather2.database
 
 import android.content.Context
 
-class Repo(context: Context) {
+object Repo {
+
+    operator fun invoke(context: Context): Repo {
+        return this
+    }
 
     private val cities = mutableListOf(
         City(0, "tomsk 0", "russia 0"),
@@ -34,14 +38,12 @@ class Repo(context: Context) {
     fun editCity(id: Long, name: String, country: String) {
         val cityToEditIndex = cities.indexOfFirst { it.id == id }
         if (cityToEditIndex >= 0) {
-            cities[cityToEditIndex] = cities[cityToEditIndex].copy(
+            cities[cityToEditIndex] = City(
                 id = id,
                 name = name,
                 country = country
             )
         }
-
-        println(cities)
     }
 
     fun getCity(cityId: Long): City = cities[cities.indexOfFirst { it.id == cityId }]

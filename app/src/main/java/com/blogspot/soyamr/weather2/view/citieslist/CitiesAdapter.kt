@@ -35,7 +35,7 @@ class CitiesAdapter(val listener: (City) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,listener)
+        holder.bind(item, listener)
     }
 }
 
@@ -44,7 +44,11 @@ class CityDiffCallback : DiffUtil.ItemCallback<City>() {
         return oldItem.id == newItem.id
     }
 
+
+    //fixme [it's doesn't working]
     override fun areContentsTheSame(oldItem: City, newItem: City): Boolean {
+        println("old: $oldItem")
+        println("new: $newItem")
         return oldItem == newItem
     }
 

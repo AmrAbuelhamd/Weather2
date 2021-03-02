@@ -19,12 +19,4 @@ class CitiesListViewModel(val repo: Repo) : ViewModel() {
     private val _cities = MutableLiveData<List<City>>(repo.getCities())
     val cities: LiveData<List<City>> = _cities
 
-    init {
-        println("****************************************************************************************************************************************************************************************************************************" +
-                "" +
-                "" +
-                "" +
-                "" +
-                cities.value)
-    }
 }
