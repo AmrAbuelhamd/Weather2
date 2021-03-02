@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blogspot.soyamr.weather2.SingleLiveEvent
-import com.blogspot.soyamr.weather2.database.City
-import com.blogspot.soyamr.weather2.database.Repo
+import com.blogspot.soyamr.weather2.repository.City
+import com.blogspot.soyamr.weather2.repository.Repo
 
 
 class CityDetailsViewModel(private val repo: Repo, val cityId: Long) : ViewModel() {

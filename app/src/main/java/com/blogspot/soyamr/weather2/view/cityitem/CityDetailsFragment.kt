@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.blogspot.soyamr.weather2.database.City
-import com.blogspot.soyamr.weather2.database.Repo
+import com.blogspot.soyamr.weather2.repository.City
+import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.databinding.FragmentCityDetailsBinding
 
 class CityDetailsFragment : Fragment() {
@@ -32,9 +32,7 @@ class CityDetailsFragment : Fragment() {
     }
 
     val args: CityDetailsFragmentArgs by navArgs()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +50,6 @@ class CityDetailsFragment : Fragment() {
         viewModel.city.observe(viewLifecycleOwner, ::bindCityData)
         viewModel.finish.observe(viewLifecycleOwner, {
             findNavController().popBackStack()
-
         })
     }
 

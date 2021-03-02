@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.blogspot.soyamr.weather2.database.City
-import com.blogspot.soyamr.weather2.database.Repo
+import com.blogspot.soyamr.weather2.repository.City
+import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
 
 class CitiesListFragment : Fragment() {

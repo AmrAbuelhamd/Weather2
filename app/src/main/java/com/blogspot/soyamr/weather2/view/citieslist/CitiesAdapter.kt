@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.blogspot.soyamr.weather2.database.City
+import com.blogspot.soyamr.weather2.repository.City
 import com.blogspot.soyamr.weather2.databinding.ListItemCityBinding
 
-class CitiesAdapter(val listener: (City) -> Unit) :
+class CitiesAdapter(private val listener: (City) -> Unit) :
     ListAdapter<City, CitiesAdapter.ViewHolder>(CityDiffCallback()) {
 
     class ViewHolder(private val binding: ListItemCityBinding) :

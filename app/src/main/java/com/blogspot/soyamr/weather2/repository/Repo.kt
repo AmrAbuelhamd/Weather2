@@ -1,10 +1,17 @@
-package com.blogspot.soyamr.weather2.database
+package com.blogspot.soyamr.weather2.repository
 
 import android.content.Context
+import com.blogspot.soyamr.weather2.repository.network.OWMApi
+import com.blogspot.soyamr.weather2.repository.network.OWMService
 
 object Repo {
 
+
+    lateinit var apiService: OWMApi
+
     operator fun invoke(context: Context): Repo {
+        println("incoke is called")
+        apiService = OWMService.retrofit
         return this
     }
 
@@ -33,7 +40,9 @@ object Repo {
     )
 
 
-    fun getCities(): List<City> = cities
+    suspend fun getCities(): List<City> {
+        return apiService.getCities().list.map { it.toDomain() }
+    }
 
     fun editCity(id: Long, name: String, country: String) {
         val cityToEditIndex = cities.indexOfFirst { it.id == id }
