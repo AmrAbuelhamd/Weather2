@@ -15,7 +15,12 @@ import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
 
 class CitiesListFragment : Fragment() {
 
-    private lateinit var binding: FragmentCitiesListBinding
+    private var _binding: FragmentCitiesListBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+
     private val viewModel: CitiesListViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
@@ -28,11 +33,8 @@ class CitiesListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentCitiesListBinding.inflate(inflater, container, false).also {
-            it.viewModel = this.viewModel
-            it.lifecycleOwner = this
-        }
+        _binding = FragmentCitiesListBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         adapter = CitiesAdapter() {
             findNavController().navigate(
@@ -43,7 +45,12 @@ class CitiesListFragment : Fragment() {
         }
         binding.citiesList.adapter = adapter
 
-        return binding.root
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onResume() {

@@ -16,7 +16,11 @@ import com.blogspot.soyamr.weather2.databinding.FragmentCityDetailsBinding
 class CityDetailsFragment : Fragment() {
 
 
-    private lateinit var binding: FragmentCityDetailsBinding
+    private var _binding: FragmentCityDetailsBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
     private val viewModel: CityDetailsViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
@@ -35,10 +39,7 @@ class CityDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentCityDetailsBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
+        _binding = FragmentCityDetailsBinding.inflate(inflater, container, false)
 
         viewModel.finish.observe(viewLifecycleOwner, {
             it.let {
@@ -47,5 +48,8 @@ class CityDetailsFragment : Fragment() {
         })
         return binding.root
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

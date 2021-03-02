@@ -14,10 +14,9 @@ class CitiesAdapter(val listener: (City) -> Unit) :
     class ViewHolder(private val binding: ListItemCityBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: City, listener: (City) -> Unit) {
-            binding.city = item
+            binding.cityNameTextView.text = item.name
+            binding.countryTextView.text = item.country
             binding.root.setOnClickListener { listener(item) }
-            binding.executePendingBindings()
-
         }
 
         companion object {
