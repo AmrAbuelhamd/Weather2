@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,7 +17,13 @@ class CityDetailsFragment : Fragment() {
 
 
     private lateinit var binding: FragmentCityDetailsBinding
-    private lateinit var viewModel: CityDetailsViewModel
+    private val viewModel: CityDetailsViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                modelClass.getConstructor(Repo::class.java, Long::class.java)
+                    .newInstance(Repo(requireContext()), args.cityId)
+        }
+    }
 
     val args: CityDetailsFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,15 +36,6 @@ class CityDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCityDetailsBinding.inflate(inflater, container, false)
-
-
-        viewModel =
-            ViewModelProvider(
-                this,
-                CityDetailsViewModelFactory(Repo(requireContext()), args.cityId)
-            ).get(
-                CityDetailsViewModel::class.java
-            )
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.blogspot.soyamr.weather2.database.City
@@ -14,7 +16,13 @@ import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
 class CitiesListFragment : Fragment() {
 
     private lateinit var binding: FragmentCitiesListBinding
-    private lateinit var viewModel: CitiesListViewModel
+    private val viewModel: CitiesListViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                modelClass.getConstructor(Repo::class.java)
+                    .newInstance(Repo(requireContext()))
+        }
+    }
     private lateinit var adapter: CitiesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,10 +30,7 @@ class CitiesListFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentCitiesListBinding.inflate(inflater, container, false).also {
-            viewModel =
-                ViewModelProvider(this, CitiesListViewModelFactory(Repo(requireContext()))).get(
-                    CitiesListViewModel::class.java
-                )
+            it.viewModel = this.viewModel
             it.viewModel = viewModel
             it.lifecycleOwner = this
         }

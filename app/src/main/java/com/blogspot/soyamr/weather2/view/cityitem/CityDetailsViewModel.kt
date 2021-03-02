@@ -8,14 +8,8 @@ import com.blogspot.soyamr.weather2.database.City
 import com.blogspot.soyamr.weather2.database.Repo
 
 
-class CityDetailsViewModelFactory(private val repo: Repo, val cityId: Long) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return CityDetailsViewModel(repo, cityId) as T
-    }
-}
 
-class CityDetailsViewModel(val repo: Repo, val cityId: Long) : ViewModel() {
+class CityDetailsViewModel(private val repo: Repo, val cityId: Long) : ViewModel() {
 
     val city: LiveData<City> = MutableLiveData(repo.getCity(cityId))
 
