@@ -33,7 +33,7 @@ class CityDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCityDetailsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
@@ -42,8 +42,7 @@ class CityDetailsFragment : Fragment() {
 
         viewModel.finish.observe(viewLifecycleOwner, {
             it.let {
-                if (it)
-                    findNavController().popBackStack()
+                findNavController().popBackStack()
             }
         })
         return binding.root

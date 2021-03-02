@@ -45,7 +45,6 @@ class CityDiffCallback : DiffUtil.ItemCallback<City>() {
     }
 
 
-    //fixme [it's doesn't working]
     override fun areContentsTheSame(oldItem: City, newItem: City): Boolean {
         println("old: $oldItem")
         println("new: $newItem")

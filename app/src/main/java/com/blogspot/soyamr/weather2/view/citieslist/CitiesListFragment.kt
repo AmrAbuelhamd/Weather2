@@ -31,7 +31,6 @@ class CitiesListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCitiesListBinding.inflate(inflater, container, false).also {
             it.viewModel = this.viewModel
-            it.viewModel = viewModel
             it.lifecycleOwner = this
         }
 
@@ -49,12 +48,12 @@ class CitiesListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.cities.observe(viewLifecycleOwner, {
-            it?.let {
-                val newList = mutableListOf<City>()
-                it.forEach { item -> newList.add(item.copy()) }
-                adapter.submitList(newList)
-            }
-        })
+        viewModel.cities.observe(this, ::updateRecyclerList)
+    }
+
+    private fun updateRecyclerList(list: List<City>?) {
+        list.let {
+            adapter.submitList(it)
+        }
     }
 }
