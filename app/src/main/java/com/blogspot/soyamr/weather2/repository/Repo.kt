@@ -12,9 +12,13 @@ object Repo {
 
     lateinit var apiService: OWMApi
 
+    var firstTime = true;
     operator fun invoke(context: Context): Repo {
         println("incoke is called")
-        apiService = OWMService.retrofit
+        if (firstTime) {
+            apiService = OWMService.retrofit
+            firstTime = false
+        }
         return this
     }
 

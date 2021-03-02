@@ -1,5 +1,6 @@
 package com.blogspot.soyamr.weather2.view.cityitem
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -72,7 +73,7 @@ class CityDetailsFragment : Fragment() {
     private fun bindCityData(city: City?) {
         city?.let {
             binding.cityNametextView.text = it.name
-            binding.countryNameTextView.text = it.country
+            binding.countryNameTextView.text = requireContext().getStringResourceByName(it.country)
             binding.idTextView.text = it.id.toString()
         }
     }
@@ -80,5 +81,9 @@ class CityDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun Context.getStringResourceByName(stringName: String): String {
+        val resId = resources.getIdentifier(stringName, "string", packageName)
+        return getString(resId)
     }
 }
