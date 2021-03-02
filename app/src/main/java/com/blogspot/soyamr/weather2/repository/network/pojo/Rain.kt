@@ -1,12 +1,11 @@
 package com.blogspot.soyamr.weather2.repository.network.pojo
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class JsonResponse(
-    val cod: String,
-    val count: Int,
-    val list: List<City>,
-    val message: String
+data class Rain(
+    @SerialName("1h")
+    val oneH: Double
 )

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.blogspot.soyamr.weather2.repository.City
+import com.blogspot.soyamr.weather2.repository.domain.City
 import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.databinding.FragmentCityDetailsBinding
 
@@ -51,14 +51,21 @@ class CityDetailsFragment : Fragment() {
         viewModel.finish.observe(viewLifecycleOwner, {
             findNavController().popBackStack()
         })
+        viewModel.loading.observe(viewLifecycleOwner, ::showLoadingState)
+
+    }
+
+    private fun showLoadingState(state: Boolean) {
+        binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
     }
 
     private fun setListeners() {
-        binding.saveButton.setOnClickListener {
-            viewModel.save(
-                binding.cityNameEditText.text.toString().trim(),
-                binding.countryNameEditText.text.toString().trim()
-            )
+        binding.goBackButton.setOnClickListener {
+            viewModel.goBack()
+//            viewModel.save(
+//                binding.cityNameEditText.text.toString().trim(),
+//                binding.countryNameEditText.text.toString().trim()
+//            )
         }
     }
 

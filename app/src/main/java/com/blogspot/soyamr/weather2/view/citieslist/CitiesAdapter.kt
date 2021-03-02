@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.blogspot.soyamr.weather2.repository.City
+import com.blogspot.soyamr.weather2.repository.domain.City
 import com.blogspot.soyamr.weather2.databinding.ListItemCityBinding
 
 class CitiesAdapter(private val listener: (City) -> Unit) :

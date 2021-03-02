@@ -9,13 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.blogspot.soyamr.weather2.repository.City
-import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
+import com.blogspot.soyamr.weather2.repository.Repo
+import com.blogspot.soyamr.weather2.repository.domain.City
 
 class CitiesListFragment : Fragment() {
 
     private var _binding: FragmentCitiesListBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -45,7 +46,12 @@ class CitiesListFragment : Fragment() {
         }
         binding.citiesList.adapter = adapter
 
+        viewModel.loading.observe(viewLifecycleOwner, ::showLoadingState)
         return view
+    }
+
+    private fun showLoadingState(state: Boolean) {
+        binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

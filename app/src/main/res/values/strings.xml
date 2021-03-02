@@ -5,4 +5,5 @@
     <string name="save">Save</string>
     <string name="edit_city">edit city</string>
     <string name="edit_country">edit country</string>
+    <string name="go_back">Go Back</string>
 </resources>

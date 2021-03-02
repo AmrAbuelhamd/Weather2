@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class JsonResponse(
-    val cod: String,
-    val count: Int,
-    val list: List<City>,
-    val message: String
+data class Weather(
+    val description: String,
+    val icon: String,
+    val id: Int,
+    val main: String
 )

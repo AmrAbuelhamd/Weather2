@@ -4,9 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class JsonResponse(
-    val cod: String,
-    val count: Int,
-    val list: List<City>,
-    val message: String
+data class Coord(
+    val lat: Double,
+    val lon: Double
 )
