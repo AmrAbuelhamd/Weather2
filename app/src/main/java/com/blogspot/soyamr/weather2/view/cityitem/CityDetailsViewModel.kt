@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.blogspot.soyamr.weather2.SingleLiveEvent
+import com.blogspot.soyamr.weather2.view.SingleLiveEvent
 import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.repository.domain.City
 import kotlinx.coroutines.launch

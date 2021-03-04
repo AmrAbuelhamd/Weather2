@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.soyamr.weather2.repository.domain.City
 import com.blogspot.soyamr.weather2.databinding.ListItemCityBinding
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class CitiesAdapter(private val listener: (City) -> Unit) :
     ListAdapter<City, CitiesAdapter.ViewHolder>(CityDiffCallback()) {
@@ -45,8 +47,6 @@ class CityDiffCallback : DiffUtil.ItemCallback<City>() {
 
 
     override fun areContentsTheSame(oldItem: City, newItem: City): Boolean {
-        println("old: $oldItem")
-        println("new: $newItem")
         return oldItem == newItem
     }
 

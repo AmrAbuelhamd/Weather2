@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
 import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.repository.domain.City
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CitiesListFragment : Fragment() {
 
     private var _binding: FragmentCitiesListBinding? = null
@@ -22,13 +24,8 @@ class CitiesListFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    private val viewModel: CitiesListViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                modelClass.getConstructor(Repo::class.java)
-                    .newInstance(Repo(requireContext()))
-        }
-    }
+    private val viewModel: CitiesListViewModel by viewModels ()
+
     private lateinit var adapter: CitiesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
