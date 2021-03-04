@@ -1,4 +1,4 @@
-package com.blogspot.soyamr.weather2.view
+package com.blogspot.soyamr.weather2
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

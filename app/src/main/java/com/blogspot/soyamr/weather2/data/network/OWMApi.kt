@@ -1,7 +1,7 @@
-package com.blogspot.soyamr.weather2.repository.network
+package com.blogspot.soyamr.weather2.data.network
 
-import com.blogspot.soyamr.weather2.repository.network.pojo.City
-import com.blogspot.soyamr.weather2.repository.network.pojo.JsonResponse
+import com.blogspot.soyamr.weather2.data.network.pojo.City
+import com.blogspot.soyamr.weather2.data.network.pojo.JsonResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

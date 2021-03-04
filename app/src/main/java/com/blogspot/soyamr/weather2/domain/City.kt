@@ -1,4 +1,4 @@
-package com.blogspot.soyamr.weather2.repository.domain
+package com.blogspot.soyamr.weather2.domain
 
 data class City(
     val id:Long,

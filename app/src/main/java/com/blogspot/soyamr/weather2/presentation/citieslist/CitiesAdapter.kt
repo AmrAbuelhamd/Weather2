@@ -1,13 +1,12 @@
-package com.blogspot.soyamr.weather2.view.citieslist
+package com.blogspot.soyamr.weather2.presentation.citieslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.blogspot.soyamr.weather2.repository.domain.City
+import com.blogspot.soyamr.weather2.domain.City
 import com.blogspot.soyamr.weather2.databinding.ListItemCityBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class CitiesAdapter(private val listener: (City) -> Unit) :

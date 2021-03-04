@@ -1,4 +1,4 @@
-package com.blogspot.soyamr.weather2.repository.network.pojo
+package com.blogspot.soyamr.weather2.data.network.pojo
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

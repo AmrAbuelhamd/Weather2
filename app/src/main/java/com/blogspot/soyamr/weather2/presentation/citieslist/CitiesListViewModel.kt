@@ -1,19 +1,19 @@
-package com.blogspot.soyamr.weather2.view.citieslist
+package com.blogspot.soyamr.weather2.presentation.citieslist
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.blogspot.soyamr.weather2.repository.Repo
-import com.blogspot.soyamr.weather2.repository.domain.City
+import com.blogspot.soyamr.weather2.domain.City
+import com.blogspot.soyamr.weather2.domain.GetCitiesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
-class CitiesListViewModel  @Inject constructor(val repo: Repo) : ViewModel() {
+class CitiesListViewModel @Inject constructor(private val getCitiesUseCase: GetCitiesUseCase) :
+    ViewModel() {
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -23,7 +23,7 @@ class CitiesListViewModel  @Inject constructor(val repo: Repo) : ViewModel() {
     init {
         viewModelScope.launch {
             loading.value = true
-            _cities.value = repo.getCities()
+            _cities.value = getCitiesUseCase()
             loading.value = false
         }
     }

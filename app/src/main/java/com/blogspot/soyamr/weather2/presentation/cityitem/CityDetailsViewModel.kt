@@ -1,9 +1,9 @@
-package com.blogspot.soyamr.weather2.view.cityitem
+package com.blogspot.soyamr.weather2.presentation.cityitem
 
 import androidx.lifecycle.*
-import com.blogspot.soyamr.weather2.repository.Repo
-import com.blogspot.soyamr.weather2.repository.domain.City
-import com.blogspot.soyamr.weather2.view.SingleLiveEvent
+import com.blogspot.soyamr.weather2.domain.City
+import com.blogspot.soyamr.weather2.domain.GetCityUseCase
+import com.blogspot.soyamr.weather2.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityDetailsViewModel @Inject constructor(
-    private val repo: Repo,
+    private val getCityUseCase: GetCityUseCase,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -29,7 +29,7 @@ class CityDetailsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             loading.value = true
-            _city.value = repo.getCity(cityId!!)
+            _city.value = getCityUseCase(cityId!!)
             loading.value = false
 
         }

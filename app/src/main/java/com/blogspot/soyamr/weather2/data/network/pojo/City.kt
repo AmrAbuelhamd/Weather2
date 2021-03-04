@@ -1,6 +1,6 @@
-package com.blogspot.soyamr.weather2.repository.network.pojo
+package com.blogspot.soyamr.weather2.data.network.pojo
 
-import com.blogspot.soyamr.weather2.repository.domain.City
+import com.blogspot.soyamr.weather2.domain.City
 import kotlinx.serialization.Serializable
 
 @Serializable

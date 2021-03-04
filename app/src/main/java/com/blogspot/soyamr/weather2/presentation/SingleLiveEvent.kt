@@ -1,4 +1,4 @@
-package com.blogspot.soyamr.weather2.view
+package com.blogspot.soyamr.weather2.presentation
 
 
 import androidx.annotation.MainThread

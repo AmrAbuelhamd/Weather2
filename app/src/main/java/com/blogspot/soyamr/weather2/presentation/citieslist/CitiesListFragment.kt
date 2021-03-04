@@ -1,4 +1,4 @@
-package com.blogspot.soyamr.weather2.view.citieslist
+package com.blogspot.soyamr.weather2.presentation.citieslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
-import com.blogspot.soyamr.weather2.repository.Repo
-import com.blogspot.soyamr.weather2.repository.domain.City
+import com.blogspot.soyamr.weather2.domain.City
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

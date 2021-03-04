@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cityDetailsFragment"
-        android:name="com.blogspot.soyamr.weather2.view.cityitem.CityDetailsFragment"
+        android:name="com.blogspot.soyamr.weather2.presentation.cityitem.CityDetailsFragment"
         android:label="fragment_city_details"
         tools:layout="@layout/fragment_city_details" >
         <argument
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/citiesListFragment2"
-        android:name="com.blogspot.soyamr.weather2.view.citieslist.CitiesListFragment"
+        android:name="com.blogspot.soyamr.weather2.presentation.citieslist.CitiesListFragment"
         android:label="fragment_cities_list"
         tools:layout="@layout/fragment_cities_list" >
         <action
