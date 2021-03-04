@@ -1,14 +1,21 @@
 package com.blogspot.soyamr.weather2.repository.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
-object OWMService {
 
+@Module
+@InstallIn(SingletonComponent::class)
+object OWMService {
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder().addInterceptor { chain ->
             var request = chain.request()
@@ -26,6 +33,9 @@ object OWMService {
                 .setLevel(HttpLoggingInterceptor.Level.BODY)
         ).build()
     }
+
+    @Provides
+    fun getRetrofitObject() = retrofit
 
     val retrofit: OWMApi by lazy {
         Retrofit.Builder()
