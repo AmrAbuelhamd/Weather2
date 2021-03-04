@@ -7,30 +7,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.blogspot.soyamr.weather2.R
 import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
 import com.blogspot.soyamr.weather2.domain.City
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CitiesListFragment : Fragment() {
+class CitiesListFragment : Fragment(R.layout.fragment_cities_list) {
 
-    private var _binding: FragmentCitiesListBinding? = null
+    private val binding: FragmentCitiesListBinding by viewBinding()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-
-    private val viewModel: CitiesListViewModel by viewModels ()
+    private val viewModel: CitiesListViewModel by viewModels()
 
     private lateinit var adapter: CitiesAdapter
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCitiesListBinding.inflate(inflater, container, false)
-        val view = binding.root
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         adapter = CitiesAdapter() {
             findNavController().navigate(
                 CitiesListFragmentDirections.actionCitiesListFragment2ToCityDetailsFragment(
@@ -41,16 +34,10 @@ class CitiesListFragment : Fragment() {
         binding.citiesList.adapter = adapter
 
         viewModel.loading.observe(viewLifecycleOwner, ::showLoadingState)
-        return view
     }
 
     private fun showLoadingState(state: Boolean) {
         binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onResume() {

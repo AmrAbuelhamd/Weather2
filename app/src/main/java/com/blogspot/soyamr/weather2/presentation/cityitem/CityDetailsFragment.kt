@@ -8,33 +8,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.blogspot.soyamr.weather2.R
+import com.blogspot.soyamr.weather2.databinding.FragmentCitiesListBinding
 import com.blogspot.soyamr.weather2.databinding.FragmentCityDetailsBinding
 import com.blogspot.soyamr.weather2.domain.City
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CityDetailsFragment : Fragment() {
+class CityDetailsFragment : Fragment(R.layout.fragment_city_details) {
 
-    private var _binding: FragmentCityDetailsBinding? = null
+    private val binding: FragmentCityDetailsBinding by viewBinding()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
 
     private val viewModel: CityDetailsViewModel by viewModels()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentCityDetailsBinding.inflate(inflater, container, false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setListeners()
         setViewModelListeners()
-        return binding.root
     }
 
     private fun setViewModelListeners() {
@@ -66,11 +60,6 @@ class CityDetailsFragment : Fragment() {
             binding.countryNameTextView.text = requireContext().getStringResourceByName(it.country)
             binding.idTextView.text = it.id.toString()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun Context.getStringResourceByName(stringName: String): String {
