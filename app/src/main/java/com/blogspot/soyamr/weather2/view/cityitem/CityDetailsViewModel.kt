@@ -1,16 +1,22 @@
 package com.blogspot.soyamr.weather2.view.cityitem
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.blogspot.soyamr.weather2.view.SingleLiveEvent
+import androidx.lifecycle.*
 import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.repository.domain.City
+import com.blogspot.soyamr.weather2.view.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class CityDetailsViewModel(private val repo: Repo, val cityId: Long) : ViewModel() {
+@HiltViewModel
+class CityDetailsViewModel @Inject constructor(
+    private val repo: Repo,
+    private val savedStateHandle: SavedStateHandle,
+) : ViewModel() {
+
+    //it's bad, but i really couldn't find a normal way to inject the value from safe args
+    private var cityId: Long? = savedStateHandle.get("cityId")
 
     private val _city = MutableLiveData<City>()
     val city: LiveData<City> = _city
@@ -23,7 +29,7 @@ class CityDetailsViewModel(private val repo: Repo, val cityId: Long) : ViewModel
     init {
         viewModelScope.launch {
             loading.value = true
-            _city.value = repo.getCity(cityId)
+            _city.value = repo.getCity(cityId!!)
             loading.value = false
 
         }

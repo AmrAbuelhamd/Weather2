@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.blogspot.soyamr.weather2.repository.domain.City
-import com.blogspot.soyamr.weather2.repository.Repo
 import com.blogspot.soyamr.weather2.databinding.FragmentCityDetailsBinding
+import com.blogspot.soyamr.weather2.repository.domain.City
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class CityDetailsFragment : Fragment() {
-
 
     private var _binding: FragmentCityDetailsBinding? = null
 
@@ -24,15 +23,9 @@ class CityDetailsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val viewModel: CityDetailsViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                modelClass.getConstructor(Repo::class.java, Long::class.java)
-                    .newInstance(Repo(requireContext()), args.cityId)
-        }
-    }
-
     val args: CityDetailsFragmentArgs by navArgs()
+
+    private val viewModel: CityDetailsViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -82,6 +75,7 @@ class CityDetailsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
     private fun Context.getStringResourceByName(stringName: String): String {
         val resId = resources.getIdentifier(stringName, "string", packageName)
         return getString(resId)
