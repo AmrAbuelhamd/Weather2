@@ -1,0 +1,34 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'kotlinx-serialization'
+    id 'kotlin-kapt'
+}
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+dependencies {
+    implementation project(":domain")
+
+    //https://betterprogramming.pub/why-and-how-to-use-kotlins-native-serialization-library-c88c0f14f93d
+    //kotlin serialization
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3-native-mt'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    api 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //hilt
+    implementation 'com.google.dagger:hilt-android:2.33-beta'
+    kapt 'com.google.dagger:hilt-compiler:2.33-beta'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha03'
+
+}
