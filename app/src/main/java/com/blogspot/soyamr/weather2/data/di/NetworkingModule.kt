@@ -11,6 +11,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 
 @Module
@@ -45,7 +46,7 @@ object WeatherService {
                 Json {
                     ignoreUnknownKeys = true
                 }.asConverterFactory("application/json".toMediaType())
-            )
+            ).addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(WeatherApi::class.java)
     }

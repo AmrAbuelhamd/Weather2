@@ -1,11 +1,14 @@
 package com.blogspot.soyamr.weather2.presentation.cityitem
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.blogspot.soyamr.weather2.domain.interactors.GetCityUseCase
 import com.blogspot.soyamr.weather2.domain.model.City
 import com.blogspot.soyamr.weather2.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 
@@ -27,12 +30,16 @@ class CityDetailsViewModel @Inject constructor(
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
-        viewModelScope.launch {
-            loading.value = true
-            _city.value = getCityUseCase(cityId!!)!!
-            loading.value = false
+        loading.value = true
+        val ss = getCityUseCase(cityId!!)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doAfterTerminate {
+                loading.value = false
+            }
+            .subscribe({
+                _city.value = it
+            }, {})
 
-        }
     }
 
 
