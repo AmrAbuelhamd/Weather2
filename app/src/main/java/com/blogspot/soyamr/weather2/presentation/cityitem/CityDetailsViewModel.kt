@@ -28,8 +28,11 @@ class CityDetailsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            loading.value = true
-            _city.value = getCityUseCase(cityId!!)!!
+            try {
+                loading.value = true
+                _city.value = getCityUseCase(cityId!!)!!
+            } catch (e: Exception) {
+            }
             loading.value = false
 
         }

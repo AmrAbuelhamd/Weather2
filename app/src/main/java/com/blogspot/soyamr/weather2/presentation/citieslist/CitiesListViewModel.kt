@@ -22,8 +22,11 @@ class CitiesListViewModel @Inject constructor(private val getCitiesUseCase: GetC
 
     init {
         viewModelScope.launch {
-            loading.value = true
-            _cities.value = getCitiesUseCase()!!
+            try {
+                loading.value = true
+                _cities.value = getCitiesUseCase()!!
+            } catch (e: Exception) {
+            }
             loading.value = false
         }
     }
